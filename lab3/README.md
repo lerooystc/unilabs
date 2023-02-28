@@ -5,4 +5,5 @@ Counter with three buttons, which allow you to:
 - Reset the counter  
 </ul>  
 Here's a screenshot of it:  
+
 ![That sucks.](/lab3/assets/xmpl.jpg)
