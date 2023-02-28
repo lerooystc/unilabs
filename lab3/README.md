@@ -3,5 +3,6 @@ Counter with three buttons, which allow you to:
 - Increment the counter  
 - Decrement the counter  
 - Reset the counter  
+<a/>  
 Here's a screenshot of it:  
-![That sucks.](/assets/xmpl.jpg)
+![That sucks.](/lab3/assets/xmpl.jpg)
