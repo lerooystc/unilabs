@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Бебра, Германия'),
+      home: const MyHomePage(title: 'Города Германии'),
     );
   }
 }
@@ -31,12 +32,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _likeCounter = 0;
-  String phoneNumba = '88005553535';
+  /*String phoneNumba = 'tel:+79788748169';*/
+  /*String location = 'https://yandex.ru/maps/-/CCUOqPb7XC';*/
 
   void _incrementCounter() {
     setState(() {
       _likeCounter++;
     });
+  }
+
+  void _sharePressed() {
+    Share.share('https://yandex.ru/maps/-/CCUOqPb7XC');
   }
 
   @override
@@ -74,14 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.transparent
-                        ),
+                      IconButton(
                         onPressed: _incrementCounter,
-                        child: const Icon(
+                        color: Colors.red,
+                        icon: const Icon(
                           Icons.favorite,
-                          color: Colors.red,
                         ),
                     ),
                       Text(
@@ -102,25 +105,65 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Column(
                           children: [
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                  backgroundColor: Colors.transparent
-                              ),
+                            IconButton(
+                              icon: const Icon(Icons.phone),
                               onPressed: () => launchUrl(
-                                Uri.parse('https://dev-yakuza.posstree.com/en/'),
+                                Uri.parse('tel:+79788722222'),
                               ),
-                              child: const Icon(
-                                Icons.phone,
-                                color: Colors.green,
+                              color: Colors.green,
                               ),
+                            const Text(
+                                'Позвонить',
+                                style: TextStyle(color:Colors.green)
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.navigation),
+                              onPressed: () => launchUrl(
+                                Uri.parse('https://yandex.ru/maps/-/CCUOqPb7XC'),
+                              ),
+                              color: Colors.green,
                             ),
                             const Text(
-                                'Позвонить'
+                                'Маршрут',
+                                style: TextStyle(color:Colors.green)
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.share),
+                              onPressed: _sharePressed,
+                              color: Colors.green,
+                            ),
+                            const Text(
+                                'Поделиться',
+                                style: TextStyle(color:Colors.green)
                             )
                           ],
                         )
                       ],
                     )
+              )
+          ),
+          const Expanded(
+              child:
+              Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Text('Название Бебра произошло от Биберахо ("деревня на'
+                      ' реке Бобр"; Бибер и сегодня означает "бобр" на немецком '
+                      'языке). Позже оно превратилось сначала в Bibera, а затем '
+                      'в сегодняшнее название Бебра. В 786 году город впервые '
+                      'документально упоминается в каталоге владений аббатства '
+                      'Херсфельд, которое было построено в 769 году. Причиной '
+                      'упоминания было то, что Бебра была пожертвована аббатству'
+                      ' для покрытия потребностей в продовольствии, что '
+                      'позволяет сделать вывод, что сам справочник, а значит и '
+                      'существование Бебры, относится к более раннему периоду.')
               )
           )
         ]
