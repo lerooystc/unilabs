@@ -7,4 +7,4 @@ Guide app, with basic functionality:
 </ul>  
 Here's a screenshot of it:  
 
-![That sucks.](/lab4/assets/xmpl.jpg)
+![That sucks.](/lab4/assets/xmpl.png)
