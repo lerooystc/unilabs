@@ -7,4 +7,4 @@ List app, with 4 screens:
 </ul>  
 Here's a screenshot (now in .gif format!!!) of it:  
 
-![That sucks.](/lab4/assets/xmpl.gif)
+![That sucks.](/lab5/assets/xmpl.gif)
