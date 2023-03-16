@@ -19,14 +19,14 @@ class InfinityListState extends State<InfinityList> {
         body: ListView.builder(
             itemBuilder: (context, i)
             {
-              if (i.isOdd) return const Divider();
-              final int index = i ~/ 2;
-              if (index >= _array.length) {
+              if (i.isOdd) return const Divider(); // return a divider if it's an odd cycle
+              final int index = i ~/ 2; // restoring the index to the actual value (not affected by divider generation)
+              if (index >= _array.length) { // if needed the app generates more strings
                 _array.addAll(
                   ['$index', '${index + 1}', '${index + 2}']
               );
               }
-              return ListTile(title: Text('Строка №${_array[index]}'));
+              return ListTile(title: Text('Строка №${_array[index]}')); // return the string if it's an even cycle
             }
             )
     );

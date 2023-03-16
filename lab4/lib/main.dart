@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _likeCounter = 0;
+  // the url launcher decided to not parse any variables so I had to just hardcode it
   /*String phoneNumba = 'tel:+79788748169';*/
   /*String location = 'https://yandex.ru/maps/-/CCUOqPb7XC';*/
 
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _sharePressed() {
+  void _sharePressed() { // share function using share_plus
     Share.share('https://yandex.ru/maps/-/CCUOqPb7XC');
   }
 
@@ -51,15 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
+      body: ListView( // listview so it scrolls
         children: [
-          Image.asset('assets/bebra.png'),
+          Image.asset('assets/bebra.png'), // image of bebra
           Expanded(
             child:
-            Padding(
+            Padding( // padding so it looks better
               padding: const EdgeInsets.only(top: 10.0),
               child:
-              Row(
+              Row( // row with basic info
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -77,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       )
                     ],
                   ),
-                  Row(
+                  Row( // the like button and a counter for it
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
@@ -95,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             )
           ),
-          Expanded(
+          Expanded( // three buttons with some functionality
               child:
               Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -108,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             IconButton(
                               icon: const Icon(Icons.phone),
                               onPressed: () => launchUrl(
-                                Uri.parse('tel:+79788722222'),
+                                Uri.parse('tel:+79788722222'), // launches the dial app 
                               ),
                               color: Colors.green,
                               ),
@@ -123,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             IconButton(
                               icon: const Icon(Icons.navigation),
                               onPressed: () => launchUrl(
-                                Uri.parse('https://yandex.ru/maps/-/CCUOqPb7XC'),
+                                Uri.parse('https://yandex.ru/maps/-/CCUOqPb7XC'), // launches the link which might be attached to an app able to parse it
                               ),
                               color: Colors.green,
                             ),
@@ -150,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
               )
           ),
-          const Expanded(
+          const Expanded( // the long text to show scrolling possibilities 
               child:
               Padding(
                   padding: EdgeInsets.all(15.0),

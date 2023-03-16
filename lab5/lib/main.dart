@@ -14,17 +14,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      theme: ThemeData( // some app styling
         primarySwatch: Colors.pink,
         scaffoldBackgroundColor: Colors.blueGrey[50],
-        elevatedButtonTheme: ElevatedButtonThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData( // some button styling
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[700],
                 foregroundColor: Colors.white,
                 minimumSize: const Size(200, 50)
             )
         ),
-        textTheme: const TextTheme(
+        textTheme: const TextTheme( // some text styling
           bodyMedium: TextStyle(fontSize: 24, color:Colors.black),
           titleMedium: TextStyle(fontSize: 24, color:Colors.black),
           labelLarge: TextStyle(fontSize: 20),
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              onPressed: () => Navigator.push(
+              onPressed: () => Navigator.push( // launches the simple list window from lib/lists
                 context,
                 MaterialPageRoute(
                     builder: (context) => const SimpleList()
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Simple List'),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.push(
+              onPressed: () => Navigator.push( // launches the infinite list window from lib/lists
                 context,
                 MaterialPageRoute(
                     builder: (context) => const InfinityList()
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Infinite List'),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.push(
+              onPressed: () => Navigator.push( // launches the infinite math list window from lib/lists
                 context,
                 MaterialPageRoute(
                     builder: (context) => const InfinityMathList()

@@ -10,7 +10,7 @@ class SimpleList extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Simple List'),
         ),
-        body: ListView(
+        body: ListView( // it just returns a list
           children: const [
             Text('0000'),
             Divider(),
