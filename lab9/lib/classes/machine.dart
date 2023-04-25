@@ -1,32 +1,50 @@
-import 'package:lab9/classes/coffee.dart';
+import 'i_coffee.dart';
+import '../coffee_making.dart';
+import 'resources.dart';
 
 class Machine {
-  int coffeeBeans = 0;
-  int milk = 0;
-  int water = 0;
-  int cash = 0;
+  Resources resources;
 
-  Machine(this.coffeeBeans, this.milk, this.water, this.cash);
+  Machine(this.resources);
 
-  bool isAvailableResource(Coffee coffee){
-    if((coffeeBeans >= coffee.coffeeBeans) && (milk >= coffee.milk) && (water >= coffee.water) && (cash >= coffee.cash)) {
+  bool isAvailableResource(ICoffee iCoffee) {
+    if ( (resources.coffeeBeans >= iCoffee.coffeeBeans()) && (resources.milk >= iCoffee.milk())
+        && (resources.water >= iCoffee.water()) && (resources.cash >= iCoffee.cash()) ) {
       return true;
     }
-    return false;
-  }
-
-  void subtractResources(Coffee coffee){
-    coffeeBeans = coffeeBeans - coffee.coffeeBeans;
-    water = water - coffee.water;
-    milk = milk - coffee.milk;
-    cash = cash - coffee.cash;
-  }
-
-  String makingCoffee(Coffee coffee){
-    if(isAvailableResource(coffee)) {
-      subtractResources(coffee);
-      return 'You got an ${coffee.name}';
+    else {
+      return false;
     }
-    return 'Not enough funds';
+  }
+
+  void addResources(int cb, int m, int w, int c) {
+    resources.coffeeBeans += cb;
+    resources.milk += m;
+    resources.water += w;
+    resources.cash += c;
+  }
+
+  void subtractResources(ICoffee iCoffee){
+    resources.coffeeBeans -= iCoffee.coffeeBeans();
+    resources.milk -= iCoffee.milk();
+    resources.water -= iCoffee.water();
+    resources.cash -= iCoffee.cash();
+  }
+
+  Future<String> makeCoffee(ICoffee iCoffee) async {
+    if (isAvailableResource(iCoffee)) {
+      await boilWater();
+      if (iCoffee.milk() > 0) {
+        await Future.wait([brewCoffee(), whipMilk()]);
+        await mixMilk();
+      }
+      else {
+        await brewCoffee();
+      }
+      subtractResources(iCoffee);
+      String name = iCoffee.name();
+      return 'You got: $name!';
+    }
+    return 'Not enough funds.';
   }
 }
