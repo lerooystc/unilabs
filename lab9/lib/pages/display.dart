@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../classes/machine.dart';
 import '../classes/coffee.dart';
-import '../main.dart';
 
 class DisplayScreen extends StatefulWidget {
   final Machine machine;
@@ -18,14 +18,30 @@ class DisplayScreen extends StatefulWidget {
 
 class _DisplayScreen extends State<DisplayScreen> {
   var _coffee;
+  String _progress = 'Coffee Maker';
   bool _brewing = false;
   TextEditingController cashController = TextEditingController();
 
   void _brewCoffee() async {
     _setBrewing(true);
-    await widget.machine.makeCoffee(_coffee);
+    _hints();
+    _progress = await widget.machine.makeCoffee(_coffee);
     _setBrewing(false);
 }
+
+  void _hints() async {
+    _progress = 'Boiling the water';
+    setState(() {
+    });
+    await Future.delayed(const Duration(seconds:3), () => _progress = 'Brewing the coffee');
+    setState(() {
+    });
+    if (_coffee.milk() > 0) {
+      await Future.delayed(
+          const Duration(seconds: 5), () => _progress = 'Mixing the milk');
+      setState(() {});
+    }
+  }
 
   void _setBrewing(bool brewing) {
     setState(() {
@@ -39,8 +55,8 @@ class _DisplayScreen extends State<DisplayScreen> {
         body: Center(
             child: ListView(
               children: [
-                ColoredBox(color: Colors.lime, child: Column(children: [ const Padding(padding: EdgeInsets.fromLTRB(0,20,0,20), child: Text(
-                  'Coffee Maker',
+                ColoredBox(color: Colors.lime, child: Column(children: [ Padding(padding: EdgeInsets.fromLTRB(0,20,0,20), child: Text(
+                  _progress,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 36),
@@ -134,6 +150,11 @@ class _DisplayScreen extends State<DisplayScreen> {
                     decoration: const InputDecoration(
                       hintText: 'Input cash.'
                     ),
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp("[0-9]")),
+                    ],
                     onChanged: (value) {
                       setState(() {});
                     },

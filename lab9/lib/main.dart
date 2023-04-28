@@ -2,6 +2,7 @@ import 'classes/machine.dart';
 import 'classes/resources.dart';
 import 'package:flutter/material.dart';
 import 'pages/display.dart';
+import 'pages/control_panel.dart';
 
 void main() => runApp(const MyApp());
 
@@ -47,14 +48,18 @@ class MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = <Widget>[
       DisplayScreen(machine: machine),
-      const Text('Index 1: Machine'),
+      ControlPanel(machine: machine),
     ];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Coffee Machine'),
       ),
-      body: Center(
-        child: widgetOptions.elementAt(_selectedIndex),
+      // body: Center(
+      //   child: widgetOptions.elementAt(_selectedIndex),
+      // )
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
